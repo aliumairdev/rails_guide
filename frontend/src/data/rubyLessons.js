@@ -23,10 +23,13 @@ The \`puts\` method prints text to the console followed by a new line.
 
 ## Try it yourself!
 
-Run the code in the editor on the right. You'll see the output below the editor.`,
+Run the code in the editor on the right. You'll see the output below the editor.
+
+Click "Submit Solution" to verify your output matches the expected result!`,
         starterCode: 'puts "Hello, World!"',
         solution: 'puts "Hello, World!"',
-        type: 'tutorial'
+        expectedOutput: 'Hello, World!',
+        type: 'exercise'
       },
       {
         id: 'variables',
@@ -185,7 +188,9 @@ fahrenheit = (celsius * 9.0 / 5.0) + 32
 
 ## Task
 
-Convert 25 degrees Celsius to Fahrenheit and store it in a variable called \`fahrenheit\`.`,
+Convert 25 degrees Celsius to Fahrenheit and store it in a variable called \`fahrenheit\`.
+
+The expected output is: **77.0**`,
         starterCode: `celsius = 25
 
 # Convert to Fahrenheit
@@ -196,6 +201,7 @@ puts fahrenheit
         solution: `celsius = 25
 fahrenheit = (celsius * 9.0 / 5.0) + 32
 puts fahrenheit`,
+        expectedOutput: '77.0',
         tests: `
 # Test cases
 celsius = 25

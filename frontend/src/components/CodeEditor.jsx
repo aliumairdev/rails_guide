@@ -2,13 +2,18 @@ import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import axios from 'axios';
 
-const CodeEditor = ({ initialCode, onSubmit, type, tests }) => {
+const CodeEditor = ({ initialCode, onSubmit, type, tests, expectedOutput }) => {
   const [code, setCode] = useState(initialCode || '');
   const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
+  const normalizeOutput = (str) => {
+    // Normalize line endings and trim whitespace
+    return str.trim().replace(/\r\n/g, '\n').replace(/\s+$/gm, '');
+  };
 
   const handleRunCode = async () => {
     setIsLoading(true);
@@ -22,7 +27,8 @@ const CodeEditor = ({ initialCode, onSubmit, type, tests }) => {
       });
 
       if (response.data.success) {
-        setOutput(response.data.output || 'Code executed successfully!');
+        const actualOutput = response.data.output || '';
+        setOutput(actualOutput || 'Code executed successfully!');
         setIsSuccess(true);
       } else {
         setOutput(`Error:\n${response.data.error}`);
@@ -37,8 +43,8 @@ const CodeEditor = ({ initialCode, onSubmit, type, tests }) => {
   };
 
   const handleValidate = async () => {
-    if (!tests) {
-      setOutput('No tests available for this lesson');
+    if (!tests && !expectedOutput) {
+      setOutput('No tests or expected output available for this lesson');
       return;
     }
 
@@ -49,17 +55,45 @@ const CodeEditor = ({ initialCode, onSubmit, type, tests }) => {
     try {
       const response = await axios.post(`${API_URL}/api/validate`, {
         code: code,
-        tests: tests
+        tests: tests,
+        expectedOutput: expectedOutput
       });
 
       if (response.data.passed) {
-        setOutput(`✓ ${response.data.message}\n\n${response.data.output}`);
+        let message = `✓ ${response.data.message}`;
+
+        if (response.data.output) {
+          message += `\n\nYour Output:\n${response.data.output}`;
+        }
+
+        if (expectedOutput && response.data.outputMatched !== undefined) {
+          if (response.data.outputMatched) {
+            message += `\n\n✓ Output matches expected output!`;
+          }
+        }
+
+        setOutput(message);
         setIsSuccess(true);
         if (onSubmit) {
           onSubmit(true);
         }
       } else {
-        setOutput(`✗ ${response.data.message}\n\n${response.data.error || response.data.output}`);
+        let errorMessage = `✗ ${response.data.message}`;
+
+        if (response.data.output) {
+          errorMessage += `\n\nYour Output:\n${response.data.output}`;
+        }
+
+        if (expectedOutput && response.data.outputMatched === false) {
+          errorMessage += `\n\nExpected Output:\n${expectedOutput}`;
+          errorMessage += `\n\n✗ Output does not match expected output`;
+        }
+
+        if (response.data.error) {
+          errorMessage += `\n\nError:\n${response.data.error}`;
+        }
+
+        setOutput(errorMessage);
         setIsSuccess(false);
       }
     } catch (error) {
@@ -88,7 +122,7 @@ const CodeEditor = ({ initialCode, onSubmit, type, tests }) => {
           >
             {isLoading ? 'Running...' : 'Run Code'}
           </button>
-          {type === 'exercise' && tests && (
+          {type === 'exercise' && (tests || expectedOutput) && (
             <button
               onClick={handleValidate}
               disabled={isLoading}

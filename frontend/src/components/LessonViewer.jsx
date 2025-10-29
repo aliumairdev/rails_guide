@@ -53,6 +53,7 @@ const LessonViewer = ({ lesson, onComplete }) => {
               initialCode={lesson.starterCode}
               type={lesson.type}
               tests={lesson.tests}
+              expectedOutput={lesson.expectedOutput}
               onSubmit={handleSubmit}
             />
           </div>

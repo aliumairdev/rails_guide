@@ -91,20 +91,31 @@ app.post('/api/execute', async (req, res) => {
   }
 });
 
+// Helper function to normalize output for comparison
+function normalizeOutput(str) {
+  if (!str) return '';
+  // Normalize line endings and trim whitespace from each line and overall
+  return str.trim().replace(/\r\n/g, '\n').replace(/\s+$/gm, '');
+}
+
 // Validate exercise solution
 app.post('/api/validate', async (req, res) => {
-  const { code, tests } = req.body;
+  const { code, tests, expectedOutput } = req.body;
 
-  if (!code || !tests) {
-    return res.status(400).json({ error: 'Code and tests are required' });
+  if (!code) {
+    return res.status(400).json({ error: 'Code is required' });
+  }
+
+  if (!tests && !expectedOutput) {
+    return res.status(400).json({ error: 'Either tests or expectedOutput is required' });
   }
 
   const tempFileName = `test_${Date.now()}_${Math.random().toString(36).substring(7)}.rb`;
   const tempFilePath = path.join(__dirname, tempFileName);
 
   try {
-    // Combine user code with test assertions
-    const fullCode = `${code}\n\n# Tests\n${tests}`;
+    // Combine user code with test assertions if tests provided
+    const fullCode = tests ? `${code}\n\n# Tests\n${tests}` : code;
 
     await writeFilePromise(tempFilePath, fullCode);
 
@@ -118,14 +129,49 @@ app.post('/api/validate', async (req, res) => {
 
     await unlinkPromise(tempFilePath);
 
-    // If tests run without errors, solution is correct
-    const passed = !stderr || stderr.trim() === '';
+    let passed = !stderr || stderr.trim() === '';
+    let outputMatched = null;
+
+    // Check expected output if provided
+    if (expectedOutput) {
+      const normalizedActual = normalizeOutput(stdout);
+      const normalizedExpected = normalizeOutput(expectedOutput);
+      outputMatched = normalizedActual === normalizedExpected;
+
+      // If we only have expectedOutput (no tests), use output match for pass/fail
+      if (!tests) {
+        passed = outputMatched;
+      } else {
+        // If we have both tests and expectedOutput, both must pass
+        passed = passed && outputMatched;
+      }
+    }
+
+    let message;
+    if (passed) {
+      if (tests && expectedOutput) {
+        message = 'All tests passed and output matches expected!';
+      } else if (tests) {
+        message = 'All tests passed!';
+      } else {
+        message = 'Output matches expected!';
+      }
+    } else {
+      if (!passed && outputMatched === false) {
+        message = 'Output does not match expected output';
+      } else if (!passed && tests) {
+        message = 'Some tests failed. Please check your code.';
+      } else {
+        message = 'Validation failed';
+      }
+    }
 
     res.json({
       passed,
       output: stdout || '',
       error: stderr || '',
-      message: passed ? 'All tests passed!' : 'Some tests failed. Please check your code.',
+      message,
+      outputMatched,
       executedAt: new Date().toISOString()
     });
 
@@ -143,6 +189,7 @@ app.post('/api/validate', async (req, res) => {
       output: error.stdout || '',
       error: error.stderr || error.message,
       message: 'Test execution failed',
+      outputMatched: false,
       executedAt: new Date().toISOString()
     });
   }
