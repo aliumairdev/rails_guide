@@ -1,0 +1,5 @@
+node_modules
+npm-debug.log
+*.rb
+temp_*
+test_*
