@@ -9,6 +9,12 @@ export const rubyLessons = [
         title: 'Introduction to Ruby',
         content: `# Welcome to Ruby!
 
+## What is this?
+
+Ruby is a programming language - it's how we tell computers what to do using words and instructions they can understand. Think of it like learning a new language to talk to your computer!
+
+## Why Learn Ruby?
+
 Ruby is a dynamic, object-oriented programming language focused on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
 
 ## Your First Ruby Program
@@ -35,6 +41,12 @@ Click "Submit Solution" to verify your output matches the expected result!`,
         id: 'variables',
         title: 'Variables and Data Types',
         content: `# Variables in Ruby
+
+## What is this?
+
+Variables are like labeled boxes where you store information. Just like you might have a box labeled "toys" to store your toys, a variable labeled "name" can store someone's name. You can put things in these boxes and get them out later!
+
+## Why Use Variables?
 
 Variables in Ruby are used to store data. You don't need to declare the type of a variable - Ruby figures it out automatically!
 
@@ -78,7 +90,9 @@ puts "My name is #{name} and I am #{age} years old."`,
         title: 'Exercise: Working with Variables',
         content: `# Exercise: Create and Use Variables
 
-Create variables and perform operations with them.
+## What is this?
+
+This is a practice exercise where you'll create your own variables and combine them together. Think of it like building with blocks - you'll take two pieces of information and put them together to make something new!
 
 ## Task
 
@@ -113,6 +127,12 @@ puts "✓ All tests passed!"
         id: 'numbers',
         title: 'Numbers and Math',
         content: `# Working with Numbers
+
+## What is this?
+
+Numbers and math in programming work just like regular math you learned in school! You can add, subtract, multiply, and divide. The computer acts like a super-fast calculator that can do the math for you.
+
+## Why Learn This?
 
 Ruby makes it easy to work with numbers and perform mathematical operations.
 
@@ -178,6 +198,12 @@ puts a % b`,
         title: 'Exercise: Temperature Converter',
         content: `# Exercise: Convert Celsius to Fahrenheit
 
+## What is this?
+
+This exercise teaches you how to convert temperatures from Celsius (used in most countries) to Fahrenheit (used in the US). You'll use a math formula to do the conversion - like following a recipe!
+
+## Task
+
 Write code to convert a temperature from Celsius to Fahrenheit.
 
 ## Formula
@@ -220,6 +246,12 @@ puts "✓ All tests passed!"
         id: 'strings',
         title: 'String Methods',
         content: `# Working with Strings
+
+## What is this?
+
+Strings are pieces of text - like words, sentences, or names. In Ruby, you can do fun things with strings like changing them to UPPERCASE, reversing them, or combining them together. It's like playing with magnetic letters!
+
+## Why Learn This?
 
 Strings in Ruby have many useful methods for manipulation.
 
@@ -275,7 +307,9 @@ puts text.length`,
         title: 'Exercise: String Manipulation',
         content: `# Exercise: Format a Name
 
-Write code that takes a name in lowercase and formats it properly.
+## What is this?
+
+This exercise teaches you how to fix names that are typed in the wrong format. You'll take a name like "john doe" and make it proper like "John Doe" - just like your name tag should look!
 
 ## Task
 
@@ -321,6 +355,12 @@ puts "✓ All tests passed!"
         id: 'conditionals',
         title: 'If Statements',
         content: `# Conditional Statements
+
+## What is this?
+
+If statements help your program make choices, like "if it's raining, bring an umbrella." Your code can check if something is true and then do different things based on what it finds. It's like giving your program a brain to make decisions!
+
+## Why Use Conditionals?
 
 Conditionals allow your program to make decisions.
 
@@ -383,6 +423,12 @@ end`,
         title: 'Exercise: Grade Calculator',
         content: `# Exercise: Calculate Letter Grade
 
+## What is this?
+
+This exercise teaches your program to act like a teacher grading a test. If you got 95 points, that's an A! If you got 85, that's a B! The computer checks the score and gives you the right letter grade.
+
+## Task
+
 Write a program that converts a numeric score to a letter grade.
 
 ## Grading Scale
@@ -441,7 +487,13 @@ puts "✓ All tests passed!"
         title: 'Loops',
         content: `# Loops in Ruby
 
-Loops allow you to repeat code multiple times.
+## What is this?
+
+Loops are like doing something over and over again. Like when you count from 1 to 10, or when you do jumping jacks - you repeat the same action multiple times. Loops tell the computer to repeat your code!
+
+## Why Use Loops?
+
+Loops allow you to repeat code multiple times without writing it over and over.
 
 ## While Loop
 
@@ -507,6 +559,12 @@ end`,
         id: 'loops-exercise',
         title: 'Exercise: FizzBuzz',
         content: `# Exercise: FizzBuzz
+
+## What is this?
+
+FizzBuzz is a classic programming challenge! It's like a number game where you count from 1 to 15, but for some numbers you say special words instead. If the number is divisible by 3, say "Fizz"! If divisible by 5, say "Buzz"! If both, say "FizzBuzz"!
+
+## Rules
 
 Write a program that prints numbers from 1 to 15, but:
 - For multiples of 3, print "Fizz" instead of the number
@@ -581,7 +639,13 @@ puts "✓ All tests passed!"
         title: 'Arrays',
         content: `# Arrays in Ruby
 
-Arrays are ordered collections of objects.
+## What is this?
+
+Arrays are like shopping lists - they let you store multiple items in order. Instead of having separate variables for "item1", "item2", "item3", you can put them all in one list! You can add items, remove items, or check what's on your list.
+
+## Why Use Arrays?
+
+Arrays are ordered collections of objects that make it easy to work with groups of related data.
 
 ## Creating Arrays
 
@@ -642,7 +706,9 @@ puts "Last fruit: #{fruits.last}"`,
         title: 'Exercise: Array Operations',
         content: `# Exercise: Working with Arrays
 
-Perform various operations on an array of numbers.
+## What is this?
+
+This exercise teaches you how to do math with a whole list of numbers at once! You'll learn to sort numbers from smallest to largest, add them all up, and find the average - all with just a few lines of code!
 
 ## Task
 
@@ -694,7 +760,13 @@ puts "✓ All tests passed!"
         title: 'Hashes',
         content: `# Hashes in Ruby
 
-Hashes are collections of key-value pairs.
+## What is this?
+
+Hashes are like dictionaries - each word (key) has a definition (value). Instead of numbered positions like arrays, hashes let you store information with labels. Like storing person["name"] = "Alice" and person["age"] = 30. Perfect for organizing related information!
+
+## Why Use Hashes?
+
+Hashes are collections of key-value pairs that let you access data by name instead of position.
 
 ## Creating Hashes
 
@@ -785,7 +857,13 @@ end`,
         title: 'Defining Methods',
         content: `# Methods in Ruby
 
-Methods are reusable blocks of code that perform specific tasks.
+## What is this?
+
+Methods are like recipes that you can use over and over! Instead of writing the same code many times, you write it once as a method and then "call" it whenever you need it. Like having a recipe for cookies - once you write it down, you can make cookies anytime!
+
+## Why Use Methods?
+
+Methods are reusable blocks of code that perform specific tasks, making your code organized and easier to maintain.
 
 ## Basic Method Definition
 
@@ -869,7 +947,9 @@ puts greet("Ruby")`,
         title: 'Exercise: Create a Calculator',
         content: `# Exercise: Build a Simple Calculator
 
-Create methods for basic arithmetic operations.
+## What is this?
+
+This exercise teaches you to build your own calculator using methods! You'll create four different "machines" (methods) - one for adding, one for subtracting, one for multiplying, and one for dividing. Each machine knows how to do its job!
 
 ## Task
 

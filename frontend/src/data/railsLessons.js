@@ -9,7 +9,13 @@ export const railsLessons = [
         title: 'What is Ruby on Rails?',
         content: `# Ruby on Rails
 
-Ruby on Rails (or just "Rails") is a web application framework written in Ruby. It follows the Model-View-Controller (MVC) architectural pattern.
+## What is this?
+
+Ruby on Rails (or just "Rails") is like a toolkit for building websites and web apps. Instead of building everything from scratch, Rails gives you ready-made tools and structures - like having LEGO blocks instead of having to carve your own blocks from wood!
+
+## What is Rails?
+
+Ruby on Rails is a web application framework written in Ruby. It follows the Model-View-Controller (MVC) architectural pattern.
 
 ## Key Principles
 
@@ -66,6 +72,12 @@ puts user.display_info`,
         id: 'rails-structure',
         title: 'Rails Application Structure',
         content: `# Rails Application Structure
+
+## What is this?
+
+When you create a Rails app, it automatically creates a bunch of folders and files for you - like setting up a filing cabinet with labeled drawers. Each folder has a specific purpose, so you always know where to put things. It keeps your code organized!
+
+## The Structure
 
 When you create a new Rails app, it generates a specific directory structure:
 
@@ -135,6 +147,12 @@ MyApp::Application.start`,
         id: 'routes',
         title: 'Routing in Rails',
         content: `# Rails Routing
+
+## What is this?
+
+Routing is like a GPS for your website! When someone types a URL (like "/about" or "/users/5"), routing tells Rails which code to run. It's the traffic director that sends each visitor to the right place in your app.
+
+## How It Works
 
 The routing system maps URLs to controller actions.
 
@@ -249,6 +267,12 @@ puts Router.match("/articles", "POST")`,
         id: 'activerecord-basics',
         title: 'ActiveRecord Basics',
         content: `# ActiveRecord
+
+## What is this?
+
+ActiveRecord lets you work with databases using Ruby code instead of writing database language (SQL). It's like having a translator! Instead of saying "SELECT * FROM users", you just say "User.all" in Ruby. Much easier!
+
+## How It Works
 
 ActiveRecord is Rails' Object-Relational Mapping (ORM) layer. It connects classes to database tables.
 
@@ -390,6 +414,12 @@ puts "First article: #{Article.find(1).title}"`,
         title: 'Model Validations',
         content: `# ActiveRecord Validations
 
+## What is this?
+
+Validations are like a bouncer at a club - they check if data is acceptable before letting it into your database. If someone tries to create a user without a name, validations say "Nope, you need a name!" It keeps bad data out!
+
+## Why Use Validations?
+
 Validations ensure data integrity before saving to the database.
 
 ## Common Validations
@@ -520,7 +550,13 @@ user2.save`,
         title: 'Model Associations',
         content: `# ActiveRecord Associations
 
-Associations define relationships between models.
+## What is this?
+
+Associations connect different models together, like how people are connected in real life. An Author has many Books, and each Book belongs to an Author. Rails makes it super easy to say "show me all books by this author!"
+
+## Why Use Associations?
+
+Associations define relationships between models, making it easy to work with related data.
 
 ## Types of Associations
 
@@ -662,6 +698,12 @@ puts "\nBook 1 author: #{book1.author.name}"`,
         title: 'Rails Controllers',
         content: `# Rails Controllers
 
+## What is this?
+
+Controllers are like the managers of your app - they receive requests from users, fetch the right data from the database, and decide what to show back. When someone visits "/articles", the controller says "get all articles and show them!"
+
+## How It Works
+
 Controllers handle incoming requests and coordinate the response.
 
 ## Basic Controller
@@ -797,6 +839,12 @@ controller.create.tap { controller.params[:title] = "First Post" }`,
         id: 'views',
         title: 'Views and ERB',
         content: `# Views in Rails
+
+## What is this?
+
+Views are the HTML pages that users actually see in their browser! They're like templates where you can mix HTML with Ruby code to show dynamic content. Instead of writing 100 separate pages, you write one template that fills in the blanks!
+
+## How It Works
 
 Views are templates that generate HTML responses. Rails uses ERB (Embedded Ruby).
 
